@@ -22,18 +22,17 @@ public class CrawlingController {
         String url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=%EC%86%8D%EB%B3%B4&sort=1&photo=0&field=0&pd=0&ds=&de=&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so:dd,p:all,a:all&start=1";
         Document document = Jsoup.connect(url).get();
 
-        Elements elements = document.select(".news_tit");
-        Elements infoGroups = document.select(".info_group > a");
+        Elements elements = document.select(".news_wrap");
+        //Elements infoGroups = document.select(".info_group > .press");
 
         for (Element element : elements) {
-            System.out.println("element.text() = " + element.toString());
-            System.out.println("element.attr(\"href\") = " + element.attr("href"));
+            //System.out.println("element.text() = " + element.toString());
+            System.out.println("element.getElementsByClass(\"press\") = " + element.getElementsByClass("press"));
+            System.out.println("element.getElementsByClass(\"news_tit\") = " + element.getElementsByClass("news_tit"));
+            System.out.println("element.getElementsByClass(\"thumb\") = " + element.getElementsByClass("api_get"));
+            System.out.println("element.getElementsByClass(\"api_get\").attr(\"href\") = " + element.getElementsByClass("api_get").attr("href"));
         }
-        for (Element infoGroup : infoGroups) {
-            System.out.println("infoGroup.toString() = " + infoGroup.toString());
-            System.out.println("infoGroup.attr(\"href\") = " + infoGroup.attr("href"));
-            System.out.println("infoGroup.text() = " + infoGroup.text());
-        }
+       
         return "ok";
     }
 }
